@@ -1,92 +1,41 @@
-# TypeScript LSP MCP
+# TypeScript LSP MCP Server
 
-MCP server providing TypeScript/JavaScript code intelligence using the official TypeScript Language Service.
+A Model Context Protocol (MCP) server that provides TypeScript/JavaScript code intelligence using the official **TypeScript Language Service**.
 
 ## Features
 
-- **hover** - Get type information and documentation at a position
-- **definition** - Jump to symbol definition
-- **references** - Find all references to a symbol
-- **completions** - Get code completion suggestions
-- **signature_help** - Get function signature information
-- **symbols** - Extract symbols (classes, functions, methods, variables)
-- **diagnostics** - Get type errors and warnings
-- **rename** - Preview symbol renaming
-- **search** - Search for patterns in files (ripgrep-style)
-- **update_document** - Update file content for incremental analysis
-- **status** - Check TypeScript environment status
+*   **Standard LSP Capabilities**:
+    *   **Hover**: Documentation and type info.
+    *   **Definition**: Jump to definition.
+    *   **References**: Find usages.
+    *   **Completions**: Intelligent code completion.
+    *   **Signature Help**: Parameter hints.
+    *   **Symbols**: Document symbol search.
+
+*   **Inlay Hints**: Reveal inferred types and parameter names inline.
+*   **Code Actions**: Quick fixes, Organize Imports, Refactorings.
+*   **Cross-File Rename**: Semantic renaming.
 
 ## Installation
 
 ```bash
-# Using npx
-npx @treedy/typescript-lsp-mcp
-
-# Or install globally
 npm install -g @treedy/typescript-lsp-mcp
 ```
 
-## MCP Configuration
+## Usage
 
-Add to your `.mcp.json` or Claude Code settings:
-
-```json
-{
-  "mcpServers": {
-    "typescript-lsp": {
-      "command": "npx",
-      "args": ["@treedy/typescript-lsp-mcp"]
-    }
-  }
-}
-```
-
-Or run directly with Bun:
-
-```json
-{
-  "mcpServers": {
-    "typescript-lsp": {
-      "command": "bun",
-      "args": ["run", "/path/to/typescript-lsp-mcp/dist/index.js"]
-    }
-  }
-}
-```
-
-## Development
+Run via command line (stdio):
 
 ```bash
-# Install dependencies
-bun install
-
-# Build
-bun run build
-
-# Run in development mode (with hot reload)
-bun run dev
-
-# Test with MCP Inspector
-bun run inspector
+typescript-lsp-mcp
 ```
 
-## Architecture
+Or via npx:
 
-Uses the official TypeScript Language Service API directly:
-
-```
-┌─────────────────┐     stdio      ┌─────────────────────┐
-│  Claude / AI    │ ◄────────────► │  typescript-lsp-mcp │
-│                 │      MCP       │                     │
-└─────────────────┘                └─────────┬───────────┘
-                                             │
-                                             ▼
-                                   ┌───────────────────┐
-                                   │    TypeScript     │
-                                   │  Language Service │
-                                   └───────────────────┘
+```bash
+npx @treedy/typescript-lsp-mcp
 ```
 
-## License
+## Configuration
 
-MIT
+It uses the `tsconfig.json` found in the workspace root.
